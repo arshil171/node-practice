@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>Product Page</h1>
+
+  <table border="">
+    <form action="/add" method="post">
+      <tr>
+        <td>user Name:</td>
+        <td><input name="userName" type="text" /></td>
+      </tr>
+      <tr>
+        <td>Email:</td>
+        <td><input name="email" type="email" /></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button>Submit</button></td>
+      </tr>
+    </form>
+
+  </table>
+
+  <br>
+  <br>
+
+
+  <table border="">
+    <thead>
+      <th>userName</th>
+      <th>email</th>
+      <th>action</th>
+    </thead>
+    <tbody>
+      <% userData.map((item, index)=>{ %>
+        <tr>
+          <td>
+            <%= item.userName %>
+          </td>
+          <td>
+            <%= item.email %>
+          </td>
+          <td>
+            <button>Edit</button>
+            <a href="/delete/<%=item.id%>"><button>Delete</button></a>
+          </td>
+        </tr>
+        <% })%>
+    </tbody>
+  </table>
+
+
+
+</body>
+
+</html>
