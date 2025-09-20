@@ -38,6 +38,7 @@
         <thead>
             <th>userName</th>
             <th>email</th>
+            <th>userImage</th>
             <th>actions</th>
         </thead>
 
@@ -49,6 +50,9 @@
                     </td>
                     <td>
                         <%= element.email %>
+                    </td>
+                    <td>
+                        <img height="100px" src="<%= element.userImage %>" alt="">
                     </td>
                     <td>
                         <a href="/edit/<%= element.id %>"> <button>edit</button></a>

@@ -2,17 +2,20 @@ const express = require("express")
 const { dbconnect } = require("./config/dbconnect")
 const { userModel } = require("./models/userModel")
 const upload = require("./middleware/multer")
-
+const path = require("path")
 const app = express()
 const PORT = 8080
+const fs = require("fs");
 
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
-
+// app.use("uploads", express.static(path.join(__dirname, "/uploads")))
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 app.get("/", async (req, res) => {
 
     let userData = await userModel.find({})
     console.log(userData)
+    console.log(userData.userImage)
     return res.render("home", { userData })
 })
 app.post("/add", upload, async (req, res) => {
@@ -33,7 +36,9 @@ app.post("/add", upload, async (req, res) => {
 
 app.get("/delete/:id", async (req, res) => {
     const { id } = req.params
+    const userData = await userModel.findById(id)
     try {
+        fs.unlinkSync(path.join(__dirname, userData.userImage))
         await userModel.findByIdAndDelete(id)
         console.log("user Deleted successfully")
     } catch (error) {
